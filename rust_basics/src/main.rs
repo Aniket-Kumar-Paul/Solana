@@ -48,6 +48,22 @@ fn main() {
     // Everything is immutable, use "mut" to make it mutable
     // let mut x = "hi";
     // x = "bye";
+
+    // SLICING ARRAY
+    // NOTE: For array, we know length in compile time but for a slice we don't
+    let arr = [0, 1, 2, 3];
+    let slice = &arr[1 .. 3]; // 1, 2 (index 1 to 3(excluding))
+    borrowing_slice(arr, slice);
+
+    // STRINGS
+    let str: &str = "Hello World";
+    let mut string: String = String::from("Hello World!");
+    let str_slice = &string[..6];
+    println!("{}", str_slice.len());
+    string.push('1'); // append 1 character
+    string.push_str("Hi"); // append string
+    string = string.replace("Hello", "Hi");
+    println!("{}", string);
 }
 
 // by default, all functions are private, pub -> public
@@ -57,4 +73,12 @@ pub fn greet(name: &str) -> () { // <return type>, () => unit type (void)
     // Eg: 
     // let x = 100;
     // x // return value
+}
+
+// Using array slice in a function
+fn borrowing_slice(arr: [u8; 4], slice: &[u8]) { // no need to give size in case of slice
+    println!("{:?}", arr);
+    println!("{:?}", slice);
+    println!("Length: {}", slice.len());
+    println!("{} {}", slice[0], slice[1]);
 }
