@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn main() {
     let a = 10;
     let b = 15;
@@ -118,7 +120,26 @@ fn main() {
     }
 
     // VECTOR
-    
+    let mut v: Vec<i64> = vec![1, 2, 3, 4, 5];
+    println!("{}", v.len());
+    println!("{}", v[0]);
+    v.push(8);
+    v.remove(0);
+    println!("{:?}", v);
+
+    // HASH MAPS
+    let mut map = HashMap::new();
+    map.insert(0, "Hi");
+    map.insert(3, "Bye");
+    println!("{:?}", map);
+
+    // .get returns Option (Enum of 2 values, Some and None)
+    match map.get(&0) { // Hi
+        Some(str) => println!("{}", str),
+        None => println!("Doesn't exist in map")
+    }
+
+    map.remove(&0);
 }
 
 // by default, all functions are private, pub -> public
