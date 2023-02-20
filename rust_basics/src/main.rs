@@ -105,6 +105,20 @@ fn main() {
 
     // TRAITS
     println!("{} {}", bird.can_fly(), bird.is_animal());
+
+    // ENUMS
+    let a: MyEnum = MyEnum::A;
+    let b: MyEnum = MyEnum::B(5);
+    let c: MyEnum = MyEnum::C { x: 10, y: 20 };
+    println!("{:?}", a);
+    println!("{:?}", b);
+    println!("{:?}", c);
+    if let MyEnum::C{x, y} = c { // B(val) = b
+        println!("{} {}", x, y);
+    }
+
+    // VECTOR
+    
 }
 
 // by default, all functions are private, pub -> public
@@ -148,4 +162,12 @@ impl Animal for Bird { // extending trait
     fn can_fly(&self) -> bool {
         true
     }
+}
+
+// ENUMS
+#[derive(Debug)]
+enum MyEnum {
+    A,
+    B(i32),
+    C{x: i32, y: i32}
 }
