@@ -98,6 +98,13 @@ fn main() {
         _ => println!("Default")
     }
 
+    // STRUCTS
+    let name = String::from("Bird");
+    let bird = Bird {name: name, attack:5};
+    bird.print_name();
+
+    // TRAITS
+    println!("{} {}", bird.can_fly(), bird.is_animal());
 }
 
 // by default, all functions are private, pub -> public
@@ -115,4 +122,30 @@ fn borrowing_slice(arr: [u8; 4], slice: &[u8]) { // no need to give size in case
     println!("{:?}", slice);
     println!("Length: {}", slice.len());
     println!("{} {}", slice[0], slice[1]);
+}
+
+// Structs
+struct Bird { 
+    name: String,
+    attack: u64 
+}
+impl Bird { // to implement functions
+    fn print_name(&self) {
+        println!("{}", self.name);
+    }
+}
+
+// Traits
+// Rust doesn't support inheritance
+// It only supports interfaces, which is basically trait
+trait Animal {
+    fn can_fly(&self) -> bool;
+    fn is_animal(&self) -> bool {
+        true // default return
+    }
+}
+impl Animal for Bird { // extending trait
+    fn can_fly(&self) -> bool {
+        true
+    }
 }
