@@ -140,6 +140,29 @@ fn main() {
     }
 
     map.remove(&0);
+
+    // OPTIONS
+    let divide1: Option<i32> = divide(4, 2);
+    let divide2: Option<i32> = divide(4, 3);
+    // Unwrapping 'Some' variant will extract value wrapped
+    println!("{:?} unwraps to {}", divide1, divide1.unwrap());
+    // Unwrapping 'None' variant will 'panic!', raise runtime exception
+    println!("{:?} unwraps to {}", divide2, divide2.unwrap());
+    
+    // RESULTS
+    let divide_r = divide_r(4, 2);
+    // match divide_r {
+    //     Ok(v) => println!("{}", v),
+    //     Err(v) => println!("{:?}", v)
+    // }
+    // another way to print,
+    // if divide_r.is_ok() {
+    //     println!("{}", divide_r.unwrap());
+    // }
+    // or,
+    println!("{}", divide_r.unwrap_or(100)); // if ok, print value, else print 100
+
+    // let res = divide_r.expect("We crashed"); // if error, pass the message instead
 }
 
 // by default, all functions are private, pub -> public
@@ -191,4 +214,32 @@ enum MyEnum {
     A,
     B(i32),
     C{x: i32, y: i32}
+}
+
+// OPTIONS
+// Enum of 2 types
+// 1. None: to indicate failure or lack of value
+// 2. Some(value): a tuple struct that wraps a value with type T
+fn divide(dividend: i32, divisor: i32) -> Option<i32> {
+    if dividend%divisor != 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+// RESULTS
+// Similar to options
+// 1. Ok(value): a wrapper that contains the value
+// 2. Err(..): an enum that contains an error code/message
+#[derive(Debug)]
+enum MyError {
+    Error1
+}
+fn divide_r(dividend: i32, divisor: i32) -> Result<i32, MyError> {
+    if dividend%divisor != 0 {
+        Err(MyError::Error1)
+    } else {
+        Ok(dividend / divisor)
+    }
 }
