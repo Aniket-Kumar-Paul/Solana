@@ -1,0 +1,6 @@
+Basic Solana Commmands
+1. solana config set --url localhost
+2. solana account
+3. solana balance <address>
+4. solana airdrop <amt> <address>
+5. solana-test-validator
